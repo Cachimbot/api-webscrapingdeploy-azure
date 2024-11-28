@@ -38,18 +38,6 @@ def get_property_details(url_propiedad):
         item_name = soup.find('p', {'class': 'form-details-heading'})
         item_name = item_name.text.strip() if item_name else None
 
-        item_features = soup.find('ul', {'class': 'property-features'})
-        if item_features:
-            features = {}
-            for li in item_features.find_all('li'):
-                feature_name = li.find('p').contents[0].strip()
-                feature_value = li.find('strong').text.strip()
-                features[feature_name] = feature_value
-        else:
-            features = {}
-
-        item_description = ', '.join([f"{key}{value}" for key, value in features.items()])
-
         n_ambiente = soup.find('li', title="Ambientes").find('div', class_='mobile').find('p', class_='strong')
         n_ambiente = n_ambiente.text.strip().split()[0] if n_ambiente else None
 
@@ -72,7 +60,6 @@ def get_property_details(url_propiedad):
             'seniority': n_antiguedad,
             'address': item_address,
             'price': item_price,
-            'description': item_description,
             'name': item_name
         }
 
