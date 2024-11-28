@@ -59,7 +59,7 @@ def get_property_details(url_propiedad):
         n_antiguedad = n_antiguedad if n_antiguedad.isdigit() else "0"
 
         #Obtener descripción(Description)
-        item_description = soup.find('div', {'class': 'section-description--content'}).text.strip() if soup.find('div', {'class': 'section-description--content'}) else None
+        description = soup.find('div', {'class': 'section-description--content'}).text.strip() if soup.find('div', {'class': 'section-description--content'}) else None
 
         return {
             'img': urls_img,
@@ -73,7 +73,7 @@ def get_property_details(url_propiedad):
             'Bathrooms': n_banios,
             'Bedrooms': n_dormitorios,
             'Seniority': n_antiguedad,
-            'Description': item_description
+            'Description': description
         }
 
     except Exception as e:
